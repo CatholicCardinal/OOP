@@ -29,8 +29,8 @@ namespace Geo
         public Pen pen1 = new Pen(Color.White);
         public Point start=new Point(0,0), finish = new Point(0, 0);
         public bool drawing = new bool();
-        public Bitmap bm = new Bitmap(2000, 2000);
-        public Bitmap bm2 = new Bitmap(2000, 2000);
+        public Bitmap bm = new Bitmap(1000, 540);
+        public Bitmap bm2 = new Bitmap(1000, 540);
         public Graphics g;
         public Image orig;
 

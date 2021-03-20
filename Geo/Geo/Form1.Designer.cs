@@ -45,7 +45,6 @@ namespace Geo
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.picture)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -53,9 +52,9 @@ namespace Geo
             // picture
             // 
             this.picture.BackColor = System.Drawing.Color.White;
-            this.picture.Location = new System.Drawing.Point(76, 89);
+            this.picture.Location = new System.Drawing.Point(-2, 89);
             this.picture.Name = "picture";
-            this.picture.Size = new System.Drawing.Size(1391, 546);
+            this.picture.Size = new System.Drawing.Size(1006, 546);
             this.picture.TabIndex = 0;
             this.picture.TabStop = false;
             // 
@@ -119,16 +118,16 @@ namespace Geo
             // 
             this.checkBox4.AutoSize = true;
             this.checkBox4.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.checkBox4.Location = new System.Drawing.Point(918, 51);
+            this.checkBox4.Location = new System.Drawing.Point(879, 50);
             this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(428, 24);
+            this.checkBox4.Size = new System.Drawing.Size(83, 24);
             this.checkBox4.TabIndex = 13;
-            this.checkBox4.Text = "n-углов(обязательно для правильных многоугольников)\r\n";
+            this.checkBox4.Text = "n-углов";
             this.checkBox4.UseVisualStyleBackColor = true;
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(787, 49);
+            this.textBox2.Location = new System.Drawing.Point(748, 49);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(125, 27);
             this.textBox2.TabIndex = 12;
@@ -137,7 +136,7 @@ namespace Geo
             // button5
             // 
             this.button5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button5.Location = new System.Drawing.Point(787, 12);
+            this.button5.Location = new System.Drawing.Point(748, 12);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(219, 28);
             this.button5.TabIndex = 11;
@@ -233,20 +232,11 @@ namespace Geo
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.panel2.Location = new System.Drawing.Point(-2, 84);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(78, 551);
-            this.panel2.TabIndex = 4;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1467, 635);
-            this.Controls.Add(this.panel2);
+            this.ClientSize = new System.Drawing.Size(1003, 635);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.picture);
             this.Name = "Form1";
@@ -264,7 +254,6 @@ namespace Geo
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.ComboBox comboBox1;
