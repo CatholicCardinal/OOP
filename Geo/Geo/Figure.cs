@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Text;
 using System.Data;
 using System.ComponentModel;
+using System.Text.RegularExpressions;
 
 
 
@@ -14,8 +15,6 @@ namespace Geo
 {
 	public abstract class Figure
     {
-        public bool drawing = false;
-
         public void color_border(bool check, string text, Pen pen)
         {
             if (check == true)
@@ -50,18 +49,20 @@ namespace Geo
                     pen.Color = Color.Yellow;
                 }
             }
+            else 
+                pen.Color = Color.White;
         }
 		public void width_border(bool check, string text, Pen pen)
         {
-            if (check == true)
+            Regex regex1 = new Regex("^[0-9]+$");
+            if ((check == true) & (regex1.IsMatch(text) == true))
             {
                 pen.Width = int.Parse(text);
 
             }
+            else 
+                pen.Width = 3;
         }
-
-        public abstract void fill_color(Pen pen, Graphics g, Point start, Point finish);
-
         public void cheking_fill_color(bool check, string text,Pen pen, Graphics g, Point start, Point finish)
         {
             if (check == true)
@@ -69,48 +70,54 @@ namespace Geo
                 if (text == "Черный")
                 {
                     pen.Color = Color.Black;
-                    fill_color(pen, g, start, finish);
                 }
 
                 if (text == "Белый")
                 {
                     pen.Color = Color.White;
-                    fill_color(pen, g, start, finish);
+
                 }
 
                 if (text == "Зеленый")
                 {
                     pen.Color = Color.Green;
-                    fill_color(pen, g, start, finish);
+
                 }
 
                 if (text == "Синий")
                 {
                     pen.Color = Color.Blue;
-                    fill_color(pen, g, start, finish);
                 }
 
                 if (text == "Красный")
                 {
                     pen.Color = Color.Red;
-                    fill_color(pen, g, start, finish);
                 }
 
                 if (text == "Жёлтый")
                 {
                     pen.Color = Color.Yellow;
-                    fill_color(pen, g, start, finish);
                 }
+            } 
+            else
+            {
+                pen.Color = Color.White;
             }
         }
 
+
+        public abstract void fill_color(Pen pen, Graphics g, Point start, Point finish);
         public abstract void Draw_picture(Pen pen, Graphics g, Point start, Point finish);
 
-        public int k = 5;
 
+        public int k = 5;
+        public Point ending = new Point();
+        public Point starting = new Point();
+        public Pen temp = new Pen(Color.Black);
         public void number(string text)
         {
-            if (text != "")
+            Regex regex1 = new Regex("^[0-9]+$");
+            if (regex1.IsMatch(text) == true)
             {
                 k = int.Parse(text);
             }
@@ -118,9 +125,6 @@ namespace Geo
             {
                 k = 3;
             }
-
         }
-
-
     }
 }

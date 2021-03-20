@@ -19,7 +19,7 @@ namespace Geo
 
         public override void fill_color(Pen pen, Graphics g, Point start, Point finish)
         {
-            throw new NotSupportedException();
+
         }
     }
 

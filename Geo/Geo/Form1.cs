@@ -22,10 +22,11 @@ namespace Geo
             picture.MouseMove += picture_MouseMove;
             picture.MouseUp += picture_MouseUp;
             picture.MouseDown += picture_MouseDown;
+            figure = new Line();
         }
 
-
-        public Pen peny= new Pen(Color.Black);
+        public Pen pen= new Pen(Color.Black, 2);
+        public Pen pen1 = new Pen(Color.White);
         public Point start=new Point(0,0), finish = new Point(0, 0);
         public bool drawing = new bool();
         public Bitmap bm = new Bitmap(2000, 2000);
@@ -34,7 +35,6 @@ namespace Geo
         public Image orig;
 
         Figure figure;
-        Point temp = new Point();
 
         public void picture_MouseMove(object sender, MouseEventArgs e)
         {
@@ -42,12 +42,10 @@ namespace Geo
             var finish = new Point(e.X, e.Y);
             bm2 = new Bitmap(bm);
             picture.Image = bm2;
-            var pen = new Pen(Color.Black, 1f);
             var g = Graphics.FromImage(bm2);
-            figure.width_border(checkBox2.Checked, textBox1.Text, pen);
-            figure.color_border(checkBox3.Checked, comboBox2.Text, pen);
             figure.Draw_picture(pen, g, start, finish);
-            figure.cheking_fill_color(checkBox1.Checked, comboBox1.Text, pen, g, start, finish);
+            figure.temp = pen;
+            figure.fill_color(pen1, g, start, finish);
             g.Dispose();
             picture.Invalidate();
         }
@@ -56,64 +54,47 @@ namespace Geo
         {
             var finish = new Point(e.X, e.Y);
             var g = Graphics.FromImage(bm);
-            var pen = new Pen(Color.Black, 1f);
-            figure.width_border(checkBox2.Checked, textBox1.Text, pen);
-            figure.color_border(checkBox3.Checked, comboBox2.Text, pen);
-            if (figure.drawing == true)
-            {
-                start = temp;
-            }
             figure.Draw_picture(pen, g, start, finish);
-            figure.cheking_fill_color(checkBox1.Checked, comboBox1.Text, pen, g, start, finish);
+            figure.ending = finish;
+            figure.temp = pen;
+            figure.fill_color(pen1, g, start, finish);
             g.Save();
             drawing = false;
             g.Dispose();
             picture.Invalidate();
-            temp = finish;
         }
         public void picture_MouseDown(object sender, MouseEventArgs e)
         {
             start = new Point(e.X, e.Y);
+            figure.starting = start;
             orig = bm;
             drawing = true;
-        }
-        public void inizialization(Figure figure)
-        {
-            figure.drawing = drawing;
         }
        
         private void button1_Click(object sender, EventArgs e)
         {
             figure = new Line();
-            inizialization(figure);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             figure = new Circle();
-            inizialization(figure);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             figure = new Square();
-            inizialization(figure);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             figure = new BrokenLine();
-            inizialization(figure);
-            figure.drawing = true;
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             figure = new Polygon();
-            figure.number(textBox2.Text);
-            inizialization(figure);
         }
-
 
         private void add_fill_color()
         {
@@ -125,6 +106,31 @@ namespace Geo
             comboBox1.Items.Add("Жёлтый");
         }
 
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            figure.width_border(checkBox2.Checked, textBox1.Text, pen);
+        }
+
+        private void comboBox2_TextChanged(object sender, EventArgs e)
+        {
+            figure.color_border(checkBox3.Checked,comboBox2.Text, pen);
+        }
+
+        private void comboBox1_TextChanged(object sender, EventArgs e)
+        {
+            figure.cheking_fill_color(checkBox1.Checked,comboBox1.Text,pen1,g,start,finish);
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            figure.number(textBox2.Text);
+        }
+  
+        private void button6_Click(object sender, EventArgs e)
+        {
+            figure = new RandomPolygon();
+        }
+
         private void add_line_color()
         {
             comboBox2.Items.Add("Белый");
@@ -134,8 +140,6 @@ namespace Geo
             comboBox2.Items.Add("Красный");
             comboBox2.Items.Add("Жёлтый");
         }
-
     }
-
 }
 
