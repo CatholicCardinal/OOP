@@ -12,18 +12,13 @@ namespace Geo
 {
     public class BrokenLine : Figure
     {
-
+        
         public override void Draw_picture(Pen pen, Graphics g, Point start, Point finish)
         {
             if (ending.X == 0)
-            {
                 g.DrawLine(pen, start, finish);
-            }
             else
-            {
-                
                 g.DrawLine(pen, ending, finish);
-            }
         }
 
         public override void fill_color(Pen pen, Graphics g, Point start, Point finish)

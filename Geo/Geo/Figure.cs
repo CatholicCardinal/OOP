@@ -126,8 +126,5 @@ namespace Geo
                 k = 3;
             }
         }
-
-        public Stack<Point> undostack = new Stack<Point>(), redostack = new Stack<Point>();
-        public bool undo = false;
     }
 }
