@@ -33,6 +33,8 @@ namespace Geo
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -83,6 +85,8 @@ namespace Geo
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.DarkGray;
+            this.panel1.Controls.Add(this.button8);
+            this.panel1.Controls.Add(this.button7);
             this.panel1.Controls.Add(this.button6);
             this.panel1.Controls.Add(this.checkBox4);
             this.panel1.Controls.Add(this.textBox2);
@@ -102,6 +106,26 @@ namespace Geo
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1469, 89);
             this.panel1.TabIndex = 3;
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(655, 11);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(52, 30);
+            this.button8.TabIndex = 16;
+            this.button8.Text = "button8";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(594, 11);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(55, 29);
+            this.button7.TabIndex = 15;
+            this.button7.Text = "button7";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button6
             // 
@@ -266,6 +290,8 @@ namespace Geo
         private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button7;
     }
 }
 

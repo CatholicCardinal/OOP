@@ -111,9 +111,12 @@ namespace Geo
 
 
         public int k = 5;
+ 
         public Point ending = new Point();
         public Point starting = new Point();
         public Pen temp = new Pen(Color.Black);
+        public PointF[] truepolygon = new PointF[1000];
+        public bool PR = false;
         public void number(string text)
         {
             Regex regex1 = new Regex("^[0-9]+$");

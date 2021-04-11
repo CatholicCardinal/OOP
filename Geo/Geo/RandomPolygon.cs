@@ -12,6 +12,7 @@ namespace Geo
 {
     public class RandomPolygon : Figure
     {
+ 
         public PointF[] polygon = new PointF[1000], polygoncopy = new PointF[1000];
         private int i=0;
         public override void Draw_picture(Pen pen, Graphics g, Point start, Point finish)
@@ -66,15 +67,29 @@ namespace Geo
             return res;
         }
 
+        //public 
         public override void fill_color(Pen pen, Graphics g, Point start, Point finish)
         {
             int k = 0;
             g.DrawLine(temp, finish, polygon[0]);
-            polygon[i] = finish;
-            k = numelements(polygon);
-            Array.Resize<PointF>(ref polygoncopy, k);
-            polygoncopy = copynum(polygon, k);
-            g.FillPolygon(pen.Brush, polygoncopy);
+            
+            
+            if (PR == false)
+            {
+                polygon[i] = finish;
+                k = numelements(polygon);
+                Array.Resize<PointF>(ref polygoncopy, k);
+                polygoncopy = copynum(polygon, k);
+                g.FillPolygon(pen.Brush, polygoncopy);
+            }
+            else
+            {
+                k = numelements(truepolygon);
+                Array.Resize<PointF>(ref polygoncopy, k);
+                polygoncopy = copynum(polygon, k);
+                //polygoncopy[polygoncopy.Length-1]=finish;
+                g.FillPolygon(pen.Brush, polygoncopy);
+            }
         }
     }
 }

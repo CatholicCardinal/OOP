@@ -35,6 +35,7 @@ namespace Geo
         public Image orig;
 
         Figure figure;
+        UndoRedo history = new UndoRedo();
 
         public void picture_MouseMove(object sender, MouseEventArgs e)
         {
@@ -53,11 +54,22 @@ namespace Geo
         public void picture_MouseUp(object sender, MouseEventArgs e)
         {
             var finish = new Point(e.X, e.Y);
-            var g = Graphics.FromImage(bm);
+            g = Graphics.FromImage(bm);
+      
             figure.Draw_picture(pen, g, start, finish);
             figure.ending = finish;
             figure.temp = pen;
             figure.fill_color(pen1, g, start, finish);
+             history.addpen(pen);
+             history.addwidth((int)pen.Width);
+             history.addundo(figure);
+             history.addfinish(finish);
+             if (history.BL == true)
+                history.addBL(true);
+             else history.addBL(false);
+            if (history.RP == true)
+                history.addRP(true);
+            else history.addRP(false);
             g.Save();
             drawing = false;
             g.Dispose();
@@ -65,7 +77,10 @@ namespace Geo
         }
         public void picture_MouseDown(object sender, MouseEventArgs e)
         {
+             history.addpen1(pen1.Color);
             start = new Point(e.X, e.Y);
+             history.cleanall();
+             history.addstart(start);
             figure.starting = start;
             orig = bm;
             drawing = true;
@@ -74,26 +89,36 @@ namespace Geo
         private void button1_Click(object sender, EventArgs e)
         {
             figure = new Line();
+            history.BL = false;
+            history.RP = false;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             figure = new Circle();
+            history.BL = false;
+            history.RP = false;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             figure = new Square();
+            history.BL = false;
+            history.RP = false;
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             figure = new BrokenLine();
+            history.BL = true;
+            history.RP = false;
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             figure = new Polygon();
+            history.RP = false;
+            history.BL = false;
         }
 
         private void add_fill_color()
@@ -129,6 +154,38 @@ namespace Geo
         private void button6_Click(object sender, EventArgs e)
         {
             figure = new RandomPolygon();
+            history.RP = true;
+            history.BL = false;
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+              figure.PR = true;
+            picture.Image = history.refresh(picture.Image);
+
+            history.redo();
+
+            var up = new Bitmap(1000, 540);
+            picture.Image = up;
+            g = Graphics.FromImage(up);
+              figure.truepolygon = history.castil();
+            history.imageupdate(g);
+            bm = up;
+              figure.PR = false;
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+              figure.PR = true;
+            picture.Image = history.refresh(picture.Image);
+            history.undo();
+              figure.truepolygon = history.castil();
+            var up = new Bitmap(1000, 540);
+            picture.Image = up;
+            g = Graphics.FromImage(up);
+            history.imageupdate(g);
+            bm = up;
+              figure.PR = false;
         }
 
         private void add_line_color()
