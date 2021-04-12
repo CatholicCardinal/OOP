@@ -67,29 +67,82 @@ namespace Geo
             return res;
         }
 
-        //public 
+        public bool findoneelemnt1(PointF[] A,PointF B)
+        {
+            for (int i = 0; A[i].X != 0; i++)
+            {
+                if (A[i] == B)
+                    return false;
+
+            }
+
+            return true;
+        }
+        public PointF[] findoneelemnt(PointF[] A)
+        {
+            PointF[] res = new PointF[1000];
+
+            for (int i = 0; A[i].X != 0; i++)
+            {
+                if (findoneelemnt1(res, A[i]))
+                {
+                    res[i] = A[i];
+                }
+            }
+
+            return res;
+        }
         public override void fill_color(Pen pen, Graphics g, Point start, Point finish)
         {
             int k = 0;
             g.DrawLine(temp, finish, polygon[0]);
-            
-            
+
+
             if (PR == false)
             {
-                polygon[i] = finish;
-                k = numelements(polygon);
-                Array.Resize<PointF>(ref polygoncopy, k);
-                polygoncopy = copynum(polygon, k);
-                g.FillPolygon(pen.Brush, polygoncopy);
+                if (truepolygon != null)
+                {
+                    var temp = new PointF[1000];
+                    //polygon[i] = finish;
+                    temp = polygon;
+                    temp = delete1(temp, finish);
+                    k = numelements(temp);
+                    Array.Resize<PointF>(ref polygoncopy, k);
+                    polygoncopy = copynum(temp, k);
+                    if (polygoncopy.Length != 0)
+                        g.FillPolygon(pen.Brush, polygoncopy);
+                }
             }
             else
             {
                 k = numelements(truepolygon);
                 Array.Resize<PointF>(ref polygoncopy, k);
                 polygoncopy = copynum(polygon, k);
-                //polygoncopy[polygoncopy.Length-1]=finish;
+                polygoncopy[polygoncopy.Length-1]=finish;
                 g.FillPolygon(pen.Brush, polygoncopy);
             }
         }
+
+        public PointF[] delete1(PointF[] A, PointF finish)
+        {
+            int i = 0;
+            for (; truepolygon[i].X != 0; i++)
+            {
+                if (truepolygon[i]!= A[i])
+                {
+                    A[i] = truepolygon[i];
+                }
+            }
+
+            A[i] = finish;
+            i++;
+            for (; i < 1000; i++)
+            {
+                A[i].X = 0;
+                A[i].Y = 0;
+            }
+            return A;
+        }
+
     }
 }

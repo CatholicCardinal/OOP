@@ -44,6 +44,7 @@ namespace Geo
             bm2 = new Bitmap(bm);
             picture.Image = bm2;
             var g = Graphics.FromImage(bm2);
+            figure.truepolygon = history.castil();
             figure.Draw_picture(pen, g, start, finish);
             figure.temp = pen;
             figure.fill_color(pen1, g, start, finish);
@@ -55,20 +56,21 @@ namespace Geo
         {
             var finish = new Point(e.X, e.Y);
             g = Graphics.FromImage(bm);
-      
+               figure.truepolygon = history.castil();
             figure.Draw_picture(pen, g, start, finish);
             figure.ending = finish;
             figure.temp = pen;
             figure.fill_color(pen1, g, start, finish);
-             history.addpen(pen);
-             history.addwidth((int)pen.Width);
-             history.addundo(figure);
-             history.addfinish(finish);
-             if (history.BL == true)
+            history.addpen(pen);
+            history.addwidth((int)pen.Width);
+            history.addundo(figure);
+            history.addfinish(finish);
+            if (history.BL == true)
                 history.addBL(true);
-             else history.addBL(false);
+            else history.addBL(false);
+            figure.truepolygon = history.castil();
             if (history.RP == true)
-                history.addRP(true);
+              history.addRP(true);
             else history.addRP(false);
             g.Save();
             drawing = false;
@@ -81,6 +83,7 @@ namespace Geo
             start = new Point(e.X, e.Y);
              history.cleanall();
              history.addstart(start);
+             figure.truepolygon = history.castil();
             figure.starting = start;
             orig = bm;
             drawing = true;

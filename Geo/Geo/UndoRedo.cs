@@ -38,8 +38,8 @@ namespace Geo
 		private List<bool> redoBL = new List<bool>();
 		public bool BL = false;
 
-		//private List<bool> undoRP = new List<bool>();
-		//private List<bool> redoRP = new List<bool>();
+		private List<bool> undoRP = new List<bool>();
+		private List<bool> redoRP = new List<bool>();
 		public bool RP = false;
 
 		public Image refresh(Image image)
@@ -56,7 +56,7 @@ namespace Geo
 			redopen.Clear();
 			redopen1.Clear();
 			redoBL.Clear();
-			//redoRP.Clear();
+			redoRP.Clear();
 		}
 
 		public void addundo(Figure figure)
@@ -96,7 +96,7 @@ namespace Geo
 
 		public void addRP(bool fl)
 		{
-			//undoRP.Add(fl);
+			undoRP.Add(fl);
 		}
 		//-------------------------------------------------------
 		public void redo()
@@ -122,8 +122,8 @@ namespace Geo
 				redoBL.Add(undoBL[undoBL.Count - 1]);
 				undoBL.RemoveAt(undoBL.Count - 1);
 
-				//redoRP.Add(undoRP[undoRP.Count - 1]);
-				//undoRP.RemoveAt(undoRP.Count - 1);
+				redoRP.Add(undoRP[undoRP.Count - 1]);
+				undoRP.RemoveAt(undoRP.Count - 1);
 			}
 		}
 
@@ -151,8 +151,8 @@ namespace Geo
 				undoBL.Add(redoBL[redoBL.Count - 1]);
 				redoBL.RemoveAt(redoBL.Count - 1);
 
-				//undoRP.Add(redoRP[redoRP.Count - 1]);
-				//redoRP.RemoveAt(redoRP.Count - 1);
+				undoRP.Add(redoRP[redoRP.Count - 1]);
+				redoRP.RemoveAt(redoRP.Count - 1);
 			}
 			
 		}
@@ -163,7 +163,7 @@ namespace Geo
 			while(i<Undo.Count)
             {
 				BL = undoBL[i];
-				//RP = undoRP[i];
+				RP = undoRP[i];
 
 				undopen[i].Width = undowidth[i];
 				if (BL == true || RP == true)
@@ -204,11 +204,15 @@ namespace Geo
 
 		private void RPdrawing(Graphics g, int i)
 		{
-			if (i == 0)// || undoRP[i - 1]==false)
+            if (undoRP[i - 1] == false)
+            {
+
+            }
+			if (i == 0) //|| undoRP[i - 1]==false)
 				Undo[i].ending.X = 0;
 			else
 				Undo[i].ending = undofinish[i - 1];
-			if (i == 0)// undoRP[i - 1]==false)
+			if (i == 0) //|| undoRP[i - 1]==false)
 				Undo[i].Draw_picture(undopen[i], g, undostart[i], undofinish[i]);
 			else
 				Undo[i].Draw_picture(undopen[i], g, undofinish[i - 1], undofinish[i]);
