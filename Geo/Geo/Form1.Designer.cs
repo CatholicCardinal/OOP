@@ -109,21 +109,23 @@ namespace Geo
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(655, 11);
+            this.button8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.button8.Location = new System.Drawing.Point(667, 10);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(52, 30);
+            this.button8.Size = new System.Drawing.Size(75, 30);
             this.button8.TabIndex = 16;
-            this.button8.Text = "button8";
+            this.button8.Text = "вперед";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button7
             // 
+            this.button7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.button7.Location = new System.Drawing.Point(594, 11);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(55, 29);
+            this.button7.Size = new System.Drawing.Size(67, 29);
             this.button7.TabIndex = 15;
-            this.button7.Text = "button7";
+            this.button7.Text = "назад";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
