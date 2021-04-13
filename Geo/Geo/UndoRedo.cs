@@ -42,6 +42,9 @@ namespace Geo
 		private List<bool> redoRP = new List<bool>();
 		public bool RP = false;
 
+		private List<Color> undobordercolor = new List<Color>();
+		private List<Color> redobordercolor = new List<Color>();
+
 		public Image refresh(Image image)
         {
 			image = null;
@@ -57,6 +60,7 @@ namespace Geo
 			redopen1.Clear();
 			redoBL.Clear();
 			redoRP.Clear();
+			redobordercolor.Clear();
 		}
 
 		public void addundo(Figure figure)
@@ -98,6 +102,11 @@ namespace Geo
 		{
 			undoRP.Add(fl);
 		}
+
+		public void addbordercolor(Color fl)
+		{
+			undobordercolor.Add(fl);
+		}
 		//-------------------------------------------------------
 		public void redo()
 		{
@@ -124,6 +133,9 @@ namespace Geo
 
 				redoRP.Add(undoRP[undoRP.Count - 1]);
 				undoRP.RemoveAt(undoRP.Count - 1);
+
+				redobordercolor.Add(undobordercolor[undobordercolor.Count - 1]);
+				undobordercolor.RemoveAt(undobordercolor.Count - 1);
 			}
 		}
 
@@ -153,6 +165,9 @@ namespace Geo
 
 				undoRP.Add(redoRP[redoRP.Count - 1]);
 				redoRP.RemoveAt(redoRP.Count - 1);
+
+				undobordercolor.Add(redobordercolor[redobordercolor.Count - 1]);
+				redobordercolor.RemoveAt(redobordercolor.Count - 1);
 			}
 			
 		}
@@ -166,6 +181,7 @@ namespace Geo
 				RP = undoRP[i];
 
 				undopen[i].Width = undowidth[i];
+				undopen[i].Color = undobordercolor[i];
 				if (BL == true || RP == true)
 				{
 					if (BL == true)
@@ -204,26 +220,28 @@ namespace Geo
 
 		private void RPdrawing(Graphics g, int i)
 		{
-            if (undoRP[i - 1] == false)
-            {
-
-            }
-			if (i == 0) //|| undoRP[i - 1]==false)
+  
+			if (i == 0 || undoRP[i - 1]==false)
 				Undo[i].ending.X = 0;
 			else
 				Undo[i].ending = undofinish[i - 1];
-			if (i == 0) //|| undoRP[i - 1]==false)
+			if (i == 0 || undoRP[i - 1]==false)
 				Undo[i].Draw_picture(undopen[i], g, undostart[i], undofinish[i]);
 			else
 				Undo[i].Draw_picture(undopen[i], g, undofinish[i - 1], undofinish[i]);
 
-			if (i==Undo.Count-1)
+			if (undoRP.Count!=1 && undoRP.Count!=0)
+			if ((i==undoRP.Count-1 && undoRP.Count!=1)||(undoRP[i]==true && undoRP[i+1] == false))
             {
+				Undo[i].PR=true;
+				Undo[i].truepolygon = castil();
 				var color = new Color();
 				color = undopen[i].Color;
 				undopen[i].Color = undopen1[i];
+				Undo[i].help = undobordercolor[i];
 				Undo[i].fill_color(undopen[i], g, undostart[i], undofinish[i]);
 				undopen[i].Color = color;
+				Undo[i].PR = false;
 			}
 			Undo[i].ending = undofinish[i];
 		}
@@ -232,13 +250,18 @@ namespace Geo
 
 		public PointF[] castil()
         {
-			if (Undo.Count != 0)
+			if (Undo.Count != 0 && undoRP.Count!=0)
 			{
 				var polygon = new PointF[1000];
-				int i = 0, j = 0;
+				int i = 0, j = 0, i1 = 0;
+                for ( ; i1 < undoRP.Count && undoRP[i1]!=true ; i1++)
+                {
+
+                }
+				i = i1;
 				polygon[j] = undostart[i];
 				j++;
-				for (; i < undofinish.Count; i++, j++)
+				for (; i < undofinish.Count && undoRP[i] == true; i++, j++)
 				{
 					polygon[j] = undofinish[i];
 				}

@@ -44,7 +44,8 @@ namespace Geo
             bm2 = new Bitmap(bm);
             picture.Image = bm2;
             var g = Graphics.FromImage(bm2);
-            figure.truepolygon = history.castil();
+            if (history.RP == true)
+                figure.truepolygon = history.castil();
             figure.Draw_picture(pen, g, start, finish);
             figure.temp = pen;
             figure.fill_color(pen1, g, start, finish);
@@ -56,10 +57,16 @@ namespace Geo
         {
             var finish = new Point(e.X, e.Y);
             g = Graphics.FromImage(bm);
-               figure.truepolygon = history.castil();
+            if (history.RP == true)
+              history.addRP(true);
+            else history.addRP(false);
+            if (history.RP == true)
+                figure.truepolygon = history.castil();
             figure.Draw_picture(pen, g, start, finish);
+            history.addbordercolor(pen.Color);
             figure.ending = finish;
             figure.temp = pen;
+            figure.help = pen.Color;
             figure.fill_color(pen1, g, start, finish);
             history.addpen(pen);
             history.addwidth((int)pen.Width);
@@ -68,10 +75,8 @@ namespace Geo
             if (history.BL == true)
                 history.addBL(true);
             else history.addBL(false);
-            figure.truepolygon = history.castil();
             if (history.RP == true)
-              history.addRP(true);
-            else history.addRP(false);
+                figure.truepolygon = history.castil();
             g.Save();
             drawing = false;
             g.Dispose();
@@ -83,7 +88,8 @@ namespace Geo
             start = new Point(e.X, e.Y);
              history.cleanall();
              history.addstart(start);
-             figure.truepolygon = history.castil();
+            if (history.RP == true)
+                figure.truepolygon = history.castil();
             figure.starting = start;
             orig = bm;
             drawing = true;
@@ -171,8 +177,10 @@ namespace Geo
             var up = new Bitmap(1000, 540);
             picture.Image = up;
             g = Graphics.FromImage(up);
-              figure.truepolygon = history.castil();
             history.imageupdate(g);
+            if (history.RP == true)
+                figure.truepolygon = history.castil();
+            else figure.truepolygon = null;
             bm = up;
               figure.PR = false;
         }
@@ -182,7 +190,8 @@ namespace Geo
               figure.PR = true;
             picture.Image = history.refresh(picture.Image);
             history.undo();
-              figure.truepolygon = history.castil();
+            if (history.RP == true)
+                figure.truepolygon = history.castil();
             var up = new Bitmap(1000, 540);
             picture.Image = up;
             g = Graphics.FromImage(up);

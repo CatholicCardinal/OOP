@@ -115,6 +115,7 @@ namespace Geo
         public Point ending = new Point();
         public Point starting = new Point();
         public Pen temp = new Pen(Color.Black);
+        public Color help = new Color();
         public PointF[] truepolygon = new PointF[1000];
         public bool PR = false;
         public void number(string text)

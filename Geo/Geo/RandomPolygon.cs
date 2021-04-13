@@ -95,8 +95,11 @@ namespace Geo
         public override void fill_color(Pen pen, Graphics g, Point start, Point finish)
         {
             int k = 0;
+            var ss = new Color();
+            ss = temp.Color;
+            temp.Color = help;
             g.DrawLine(temp, finish, polygon[0]);
-
+            temp.Color=ss;
 
             if (PR == false)
             {
