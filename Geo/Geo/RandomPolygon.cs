@@ -10,6 +10,7 @@ using System.ComponentModel;
 
 namespace Geo
 {
+    [Serializable]
     public class RandomPolygon : Figure
     {
  

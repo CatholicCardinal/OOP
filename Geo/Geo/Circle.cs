@@ -7,10 +7,12 @@ using System.Drawing;
 using System.Text;
 using System.Data;
 using System.ComponentModel;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Geo
 {
-	public class Circle:Figure
+    [Serializable]
+    public class Circle:Figure
 	{
         public override void Draw_picture(Pen pen, Graphics g, Point start, Point finish)
         {

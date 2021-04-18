@@ -13,37 +13,39 @@ using System.Collections.Specialized;
 using System.Collections.Concurrent;
 
 
-
 namespace Geo
 {
+	[Serializable]
 	public class UndoRedo
 	{
 		public List<Figure> Undo = new List<Figure>();
 		public List<Figure> Redo = new List<Figure>();
-		private List<Point> undostart = new List<Point>();
-		private List<Point> undofinish = new List<Point>();
-		private List<Point> redostart = new List<Point>();
-		private List<Point> redofinish = new List<Point>();
+		public List<Point> undostart = new List<Point>();
+		public List<Point> undofinish = new List<Point>();
+		public List<Point> redostart = new List<Point>();
+		public List<Point> redofinish = new List<Point>();
 
-		private List<Pen> undopen = new List<Pen>();
-		private List<Pen> redopen = new List<Pen>();
+		[NonSerialized]
+		public List<Pen> undopen = new List<Pen>();
+		[NonSerialized]
+		public List<Pen> redopen = new List<Pen>();
 
-		private List<Color> undopen1 = new List<Color>();
-		private List<Color> redopen1 = new List<Color>();
+		public List<Color> undopen1 = new List<Color>();
+		public List<Color> redopen1 = new List<Color>();
 
-		private List<int> undowidth = new List<int>();
-		private List<int> redowidth = new List<int>();
+		public List<int> undowidth = new List<int>();
+		public List<int> redowidth = new List<int>();
 
-		private List<bool> undoBL = new List<bool>();
-		private List<bool> redoBL = new List<bool>();
+		public List<bool> undoBL = new List<bool>();
+		public List<bool> redoBL = new List<bool>();
 		public bool BL = false;
 
-		private List<bool> undoRP = new List<bool>();
-		private List<bool> redoRP = new List<bool>();
+		public List<bool> undoRP = new List<bool>();
+		public List<bool> redoRP = new List<bool>();
 		public bool RP = false;
 
-		private List<Color> undobordercolor = new List<Color>();
-		private List<Color> redobordercolor = new List<Color>();
+		public List<Color> undobordercolor = new List<Color>();
+		public List<Color> redobordercolor = new List<Color>();
 
 		public Image refresh(Image image)
         {
@@ -239,6 +241,7 @@ namespace Geo
 				color = undopen[i].Color;
 				undopen[i].Color = undopen1[i];
 				Undo[i].help = undobordercolor[i];
+				Undo[i].temp = new Pen(undobordercolor[i],undowidth[i]);
 				Undo[i].fill_color(undopen[i], g, undostart[i], undofinish[i]);
 				undopen[i].Color = color;
 				Undo[i].PR = false;
@@ -247,7 +250,6 @@ namespace Geo
 		}
 
 		
-
 		public PointF[] castil()
         {
 			if (Undo.Count != 0 && undoRP.Count!=0)

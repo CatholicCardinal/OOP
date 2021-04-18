@@ -8,12 +8,14 @@ using System.Text;
 using System.Data;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
+using System.Runtime.Serialization.Formatters.Binary;
 
 
 
 namespace Geo
 {
-	public abstract class Figure
+    [Serializable]
+    public abstract class Figure
     {
         public void color_border(bool check, string text, Pen pen)
         {
@@ -114,6 +116,7 @@ namespace Geo
  
         public Point ending = new Point();
         public Point starting = new Point();
+        [NonSerialized]
         public Pen temp = new Pen(Color.Black);
         public Color help = new Color();
         public PointF[] truepolygon = new PointF[1000];

@@ -10,6 +10,7 @@ using System.ComponentModel;
 
 namespace Geo
 {
+    [Serializable]
     public class Polygon : Figure
     {
         private static void DrawRegularPolygon(PointF center, int vertexes, float radius, Graphics graphics, Pen pen)

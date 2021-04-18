@@ -10,7 +10,8 @@ using System.ComponentModel;
 
 namespace Geo
 {
-	public class Line:Figure
+    [Serializable]
+    public class Line:Figure
 	{
 		public override void Draw_picture(Pen pen, Graphics g, Point start, Point finish)
         {

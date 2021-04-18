@@ -33,6 +33,8 @@ namespace Geo
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button10 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
@@ -56,7 +58,7 @@ namespace Geo
             this.picture.BackColor = System.Drawing.Color.White;
             this.picture.Location = new System.Drawing.Point(-2, 89);
             this.picture.Name = "picture";
-            this.picture.Size = new System.Drawing.Size(1006, 546);
+            this.picture.Size = new System.Drawing.Size(1039, 546);
             this.picture.TabIndex = 0;
             this.picture.TabStop = false;
             // 
@@ -85,6 +87,8 @@ namespace Geo
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.DarkGray;
+            this.panel1.Controls.Add(this.button10);
+            this.panel1.Controls.Add(this.button9);
             this.panel1.Controls.Add(this.button8);
             this.panel1.Controls.Add(this.button7);
             this.panel1.Controls.Add(this.button6);
@@ -106,6 +110,28 @@ namespace Geo
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1469, 89);
             this.panel1.TabIndex = 3;
+            // 
+            // button10
+            // 
+            this.button10.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.button10.Location = new System.Drawing.Point(970, 10);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(69, 27);
+            this.button10.TabIndex = 18;
+            this.button10.Text = "Загрузить";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // button9
+            // 
+            this.button9.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.button9.Location = new System.Drawing.Point(968, 43);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(71, 29);
+            this.button9.TabIndex = 17;
+            this.button9.Text = "Сохранить";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button8
             // 
@@ -262,7 +288,7 @@ namespace Geo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1003, 635);
+            this.ClientSize = new System.Drawing.Size(1036, 635);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.picture);
             this.Name = "Form1";
@@ -294,6 +320,8 @@ namespace Geo
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button button10;
     }
 }
 

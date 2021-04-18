@@ -10,6 +10,7 @@ using System.ComponentModel;
 
 namespace Geo
 {
+    [Serializable]
     public class Square : Figure
     {
         public override void Draw_picture(Pen pen, Graphics g, Point start, Point finish)
