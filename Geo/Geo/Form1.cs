@@ -233,21 +233,24 @@ namespace Geo
             Form2 f2 = new Form2();
             f2.ShowDialog();
 
-            using (FileStream fs = new FileStream(f2.puth, FileMode.OpenOrCreate))
+            if (File.Exists(f2.puth) == true)
             {
-                // десериализация (создание объекта из потока байт)
-                UndoRedo train = (UndoRedo)formatter.Deserialize(fs);
-                addingpen(train);
-                history = train;
+                using (FileStream fs = new FileStream(f2.puth, FileMode.OpenOrCreate))
+                {
+                    // десериализация (создание объекта из потока байт)
+                    UndoRedo train = (UndoRedo)formatter.Deserialize(fs);
+                    addingpen(train);
+                    history = train;
+                }
+                if (history.RP == true)
+                    figure.truepolygon = history.castil();
+                var up = new Bitmap(1000, 540);
+                picture.Image = up;
+                g = Graphics.FromImage(up);
+                history.imageupdate(g);
+                bm = up;
+                figure.PR = false;
             }
-            if (history.RP == true)
-                figure.truepolygon = history.castil();
-            var up = new Bitmap(1000, 540);
-            picture.Image = up;
-            g = Graphics.FromImage(up);
-            history.imageupdate(g);
-            bm = up;
-            figure.PR = false;
         }
 
         private void addingpen(UndoRedo train)
