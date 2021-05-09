@@ -9,6 +9,7 @@ using System.Data;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Reflection;
 
 
 
@@ -102,6 +103,7 @@ namespace Geo
             figure = new Line();
             history.BL = false;
             history.RP = false;
+            lblActivePlugin.Text = null;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -109,6 +111,7 @@ namespace Geo
             figure = new Circle();
             history.BL = false;
             history.RP = false;
+            lblActivePlugin.Text = null;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -116,6 +119,7 @@ namespace Geo
             figure = new Square();
             history.BL = false;
             history.RP = false;
+            lblActivePlugin.Text = null;
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -123,6 +127,7 @@ namespace Geo
             figure = new BrokenLine();
             history.BL = true;
             history.RP = false;
+            lblActivePlugin.Text = null;
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -130,6 +135,7 @@ namespace Geo
             figure = new Polygon();
             history.RP = false;
             history.BL = false;
+            lblActivePlugin.Text = null;
         }
 
         private void add_fill_color()
@@ -167,6 +173,7 @@ namespace Geo
             figure = new RandomPolygon();
             history.RP = true;
             history.BL = false;
+            lblActivePlugin.Text = null;
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -273,6 +280,66 @@ namespace Geo
                     train.redopen.Add(penny);
                 }
             }
+        }
+
+        public static Dictionary<int, Type> pluginsList = new Dictionary<int, Type>();
+        private int initialPluginNumber = 0;
+        private int pluginsCount = 0;
+        private string currentPlugin = "";
+
+        //Добавление нового плагина
+        private void menuStripPlugins_Add_Click(object sender, EventArgs e)
+        {
+            var dlgFileOpen = new OpenFileDialog();
+            dlgFileOpen.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            dlgFileOpen.Filter = @"File dll (*.dll)|*.dll";
+
+            if (dlgFileOpen.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                var filename = dlgFileOpen.FileName;
+
+                try
+                {
+                    Assembly asm = Assembly.LoadFrom(filename);
+                    Type[] pluginTypes = asm.GetTypes();
+
+                    foreach (Type pluginType in pluginTypes)
+                    {
+                        if (typeof(Figure).IsAssignableFrom(pluginType))
+                        {
+                            pluginsList[pluginsCount] = pluginType;
+                            var currPlugin = new ToolStripMenuItem();
+                            menuStripItem_Plugins.DropDownItems.Add(currPlugin);
+                            menuStripItem_Plugins.DropDownItems[initialPluginNumber + pluginsCount].Name = Convert.ToString(pluginsCount);
+                            menuStripItem_Plugins.DropDownItems[initialPluginNumber + pluginsCount].Text = pluginType.Name;
+                            menuStripItem_Plugins.DropDownItems[initialPluginNumber + pluginsCount].DisplayStyle = ToolStripItemDisplayStyle.Text;
+                            menuStripItem_Plugins.DropDownItems[initialPluginNumber + pluginsCount].Click += PluginOnClick;
+
+                            pluginsCount++;
+                        }
+                    }
+                }
+                catch (Exception error)
+                {
+                    MessageBox.Show(error.Message, "Ошибка...", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                }
+            }
+        }
+
+        //Загрузка объекта фигуры из плагина
+        private void PluginOnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                currentPlugin = (sender as ToolStripMenuItem).Name;
+                lblActivePlugin.Text = "Активный плагин: " + menuStripItem_Plugins.DropDownItems[initialPluginNumber + Convert.ToInt32(currentPlugin)].Text;
+
+                figure = (Figure)Activator.CreateInstance(pluginsList[Convert.ToInt32(currentPlugin)]);
+                int i = 0;
+                i++;
+                
+            }
+            catch { }
         }
     }
 }

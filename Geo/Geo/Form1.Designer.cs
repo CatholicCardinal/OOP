@@ -33,6 +33,7 @@ namespace Geo
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button11 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
@@ -49,8 +50,12 @@ namespace Geo
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.menuStripItem_Plugins = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblActivePlugin = new System.Windows.Forms.ToolStripTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.picture)).BeginInit();
             this.panel1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // picture
@@ -65,7 +70,7 @@ namespace Geo
             // button1
             // 
             this.button1.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.button1.Location = new System.Drawing.Point(14, 13);
+            this.button1.Location = new System.Drawing.Point(10, 34);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(94, 29);
             this.button1.TabIndex = 1;
@@ -76,7 +81,7 @@ namespace Geo
             // button2
             // 
             this.button2.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.button2.Location = new System.Drawing.Point(114, 13);
+            this.button2.Location = new System.Drawing.Point(110, 34);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(91, 29);
             this.button2.TabIndex = 2;
@@ -87,6 +92,7 @@ namespace Geo
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.DarkGray;
+            this.panel1.Controls.Add(this.button11);
             this.panel1.Controls.Add(this.button10);
             this.panel1.Controls.Add(this.button9);
             this.panel1.Controls.Add(this.button8);
@@ -105,16 +111,28 @@ namespace Geo
             this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.menuStrip1);
             this.panel1.ForeColor = System.Drawing.SystemColors.ButtonShadow;
             this.panel1.Location = new System.Drawing.Point(-2, -1);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1469, 89);
             this.panel1.TabIndex = 3;
             // 
+            // button11
+            // 
+            this.button11.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.button11.Location = new System.Drawing.Point(398, 0);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(135, 31);
+            this.button11.TabIndex = 20;
+            this.button11.Text = "Добавление плагина";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.menuStripPlugins_Add_Click);
+            // 
             // button10
             // 
             this.button10.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button10.Location = new System.Drawing.Point(970, 10);
+            this.button10.Location = new System.Drawing.Point(964, 34);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(69, 27);
             this.button10.TabIndex = 18;
@@ -125,7 +143,7 @@ namespace Geo
             // button9
             // 
             this.button9.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button9.Location = new System.Drawing.Point(968, 43);
+            this.button9.Location = new System.Drawing.Point(962, 61);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(71, 29);
             this.button9.TabIndex = 17;
@@ -136,7 +154,7 @@ namespace Geo
             // button8
             // 
             this.button8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button8.Location = new System.Drawing.Point(667, 10);
+            this.button8.Location = new System.Drawing.Point(663, 34);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(75, 30);
             this.button8.TabIndex = 16;
@@ -147,7 +165,7 @@ namespace Geo
             // button7
             // 
             this.button7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button7.Location = new System.Drawing.Point(594, 11);
+            this.button7.Location = new System.Drawing.Point(590, 34);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(67, 29);
             this.button7.TabIndex = 15;
@@ -158,7 +176,7 @@ namespace Geo
             // button6
             // 
             this.button6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button6.Location = new System.Drawing.Point(460, 12);
+            this.button6.Location = new System.Drawing.Point(456, 34);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(128, 29);
             this.button6.TabIndex = 14;
@@ -170,7 +188,7 @@ namespace Geo
             // 
             this.checkBox4.AutoSize = true;
             this.checkBox4.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.checkBox4.Location = new System.Drawing.Point(879, 50);
+            this.checkBox4.Location = new System.Drawing.Point(875, 63);
             this.checkBox4.Name = "checkBox4";
             this.checkBox4.Size = new System.Drawing.Size(83, 24);
             this.checkBox4.TabIndex = 13;
@@ -179,7 +197,7 @@ namespace Geo
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(748, 49);
+            this.textBox2.Location = new System.Drawing.Point(744, 62);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(125, 27);
             this.textBox2.TabIndex = 12;
@@ -188,7 +206,7 @@ namespace Geo
             // button5
             // 
             this.button5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button5.Location = new System.Drawing.Point(748, 12);
+            this.button5.Location = new System.Drawing.Point(744, 35);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(219, 28);
             this.button5.TabIndex = 11;
@@ -200,7 +218,7 @@ namespace Geo
             // 
             this.checkBox3.AutoSize = true;
             this.checkBox3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.checkBox3.Location = new System.Drawing.Point(630, 52);
+            this.checkBox3.Location = new System.Drawing.Point(626, 65);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(112, 24);
             this.checkBox3.TabIndex = 10;
@@ -211,7 +229,7 @@ namespace Geo
             // comboBox2
             // 
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(478, 48);
+            this.comboBox2.Location = new System.Drawing.Point(474, 61);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(146, 28);
             this.comboBox2.TabIndex = 9;
@@ -221,7 +239,7 @@ namespace Geo
             // 
             this.checkBox2.AutoSize = true;
             this.checkBox2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.checkBox2.Location = new System.Drawing.Point(378, 50);
+            this.checkBox2.Location = new System.Drawing.Point(374, 63);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(94, 24);
             this.checkBox2.TabIndex = 8;
@@ -231,7 +249,7 @@ namespace Geo
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(247, 48);
+            this.textBox1.Location = new System.Drawing.Point(243, 61);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(125, 27);
             this.textBox1.TabIndex = 7;
@@ -242,7 +260,7 @@ namespace Geo
             // 
             this.checkBox1.AutoSize = true;
             this.checkBox1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.checkBox1.Location = new System.Drawing.Point(144, 52);
+            this.checkBox1.Location = new System.Drawing.Point(140, 65);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(87, 24);
             this.checkBox1.TabIndex = 6;
@@ -253,7 +271,7 @@ namespace Geo
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(14, 48);
+            this.comboBox1.Location = new System.Drawing.Point(10, 61);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(124, 28);
             this.comboBox1.TabIndex = 5;
@@ -264,7 +282,7 @@ namespace Geo
             // 
             this.button4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.button4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button4.Location = new System.Drawing.Point(346, 13);
+            this.button4.Location = new System.Drawing.Point(342, 34);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(108, 29);
             this.button4.TabIndex = 4;
@@ -276,13 +294,36 @@ namespace Geo
             // 
             this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.button3.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.button3.Location = new System.Drawing.Point(211, 13);
+            this.button3.Location = new System.Drawing.Point(207, 34);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(129, 29);
             this.button3.TabIndex = 3;
             this.button3.Text = "Прямоугольник";
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuStripItem_Plugins,
+            this.lblActivePlugin});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1469, 31);
+            this.menuStrip1.TabIndex = 19;
+            this.menuStrip1.Text = "Список плагинов";
+            // 
+            // menuStripItem_Plugins
+            // 
+            this.menuStripItem_Plugins.Name = "menuStripItem_Plugins";
+            this.menuStripItem_Plugins.Size = new System.Drawing.Size(143, 27);
+            this.menuStripItem_Plugins.Text = "Список плагинов";
+            // 
+            // lblActivePlugin
+            // 
+            this.lblActivePlugin.Name = "lblActivePlugin";
+            this.lblActivePlugin.Size = new System.Drawing.Size(250, 27);
             // 
             // Form1
             // 
@@ -296,6 +337,8 @@ namespace Geo
             ((System.ComponentModel.ISupportInitialize)(this.picture)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -322,6 +365,11 @@ namespace Geo
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
+        private System.Windows.Forms.ToolStripMenuItem menuStripItem_Plugins;
+        private System.Windows.Forms.ToolStripTextBox lblActivePlugin;
+        private System.Windows.Forms.Button button11;
     }
 }
 
